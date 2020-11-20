@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.matheusf.project.domain.Curso;
 import com.matheusf.project.domain.dto.CursoDTO;
@@ -38,7 +37,6 @@ public class CursoService {
 		return cursoRepository.findByNomeContainingIgnoreCase(name);
 	}
 	
-	@Transactional
 	public Curso insert(Curso curso) {
 		curso.setId(null);
 		return cursoRepository.save(curso);
@@ -46,9 +44,9 @@ public class CursoService {
 	
 	public void delete(Integer id) {
 		CursoDTO curso = findById(id);
-		if (!curso.getTurmas().isEmpty()) {
-			throw new IntegrityException("Não é possivel excluir um curso que há turmas");
+		if (curso.getTurmas().isEmpty()) {
+			cursoRepository.deleteById(id);
 		}
-		cursoRepository.deleteById(id);		
+		throw new IntegrityException("Não é possivel excluir um curso que há turmas");
 	}	
 }
