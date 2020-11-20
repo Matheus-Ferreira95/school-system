@@ -2,34 +2,25 @@ package com.matheusf.project.domain.dto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Range;
-
-public class NewCursoDTO {
+public class CursoUpdateDTO {
 	
-	@NotBlank
-	@Size(min = 1, max = 80)
-	private String nome;
+	@Size(max = 80)
+	private String nome;	
 	
 	@Max(value = 140, message = "A maior carga horária permitida é de 140")
 	@Min(value = 10, message = "A menor carga horária permitida é de 10")
-	@NotNull
-	private Integer cargaHoraria;
+	private Integer cargaHoraria;	
 	
-	@NotNull
 	@Min(value = 20)
-	private Double valor;
+	private Double valor;	
 	
-	@NotNull
-	@Range(min = 100, max = 100, message = "A maior nota possivel é 100")
-	private Double notaPrevista;
-	
-	@NotNull
 	@Min(value = 50)
 	private Double notaMinima;
+	
+	public CursoUpdateDTO() {
+	}
 
 	public String getNome() {
 		return nome;
@@ -53,14 +44,6 @@ public class NewCursoDTO {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
-	}
-
-	public Double getNotaPrevista() {
-		return notaPrevista;
-	}
-
-	public void setNotaPrevista(Double notaPrevista) {
-		this.notaPrevista = notaPrevista;
 	}
 
 	public Double getNotaMinima() {

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +19,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.matheusf.project.domain.Curso;
 import com.matheusf.project.domain.dto.CursoDTO;
-import com.matheusf.project.domain.dto.CursoUpdateDTO;
 import com.matheusf.project.domain.dto.NewCursoDTO;
 import com.matheusf.project.domain.service.CursoService;
 
@@ -39,7 +37,7 @@ public class CursoResource {
 	
 	@GetMapping(value = "/{cursoId}")
 	public ResponseEntity<CursoDTO> findById(@PathVariable Integer cursoId) {
-		CursoDTO cursoDTO = new CursoDTO(cursoService.findById(cursoId));
+		CursoDTO cursoDTO = cursoService.findById(cursoId);
 		return ResponseEntity.ok().body(cursoDTO);
 	}
 	
@@ -62,12 +60,6 @@ public class CursoResource {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		cursoService.delete(id);
 		return ResponseEntity.noContent().build();
-	}
-	
-	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> update(@PathVariable Integer id, @Valid @RequestBody CursoUpdateDTO dto) {
-		cursoService.update(id, dto);
-		return ResponseEntity.ok().build();
 	}
 
 	private Curso toEntity(NewCursoDTO newCurso) {

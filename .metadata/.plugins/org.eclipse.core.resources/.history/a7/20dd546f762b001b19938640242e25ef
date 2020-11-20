@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.matheusf.project.domain.Curso;
 import com.matheusf.project.domain.dto.CursoDTO;
-import com.matheusf.project.domain.dto.CursoUpdateDTO;
 import com.matheusf.project.domain.repositories.CursoRepository;
 import com.matheusf.project.domain.service.exceptions.IntegrityException;
 import com.matheusf.project.domain.service.exceptions.ResourceNotFoundException;
@@ -27,10 +26,10 @@ public class CursoService {
 				.collect(Collectors.toList());
 	}	
 	
-	public Curso findById(Integer id) {
+	public CursoDTO findById(Integer id) {
 		Optional<Curso> opt = cursoRepository.findById(id);
 		if (opt.isPresent()) {
-			return opt.get();
+			return new CursoDTO(opt.get());
 		}
 		throw new ResourceNotFoundException("Curso com id " + id + " não encontrado");
 	}
@@ -46,31 +45,10 @@ public class CursoService {
 	}	
 	
 	public void delete(Integer id) {
-		Curso curso = findById(id);
+		CursoDTO curso = findById(id);
 		if (!curso.getTurmas().isEmpty()) {
 			throw new IntegrityException("Não é possivel excluir um curso que há turmas");
 		}
 		cursoRepository.deleteById(id);		
-	}	
-	
-	public void update(Integer id, CursoUpdateDTO dto) {
-		Curso curso = findById(id);
-		updateData(curso, dto);
-		cursoRepository.save(curso);
-	}
-
-	private void updateData(Curso curso, CursoUpdateDTO dto) {
-		if (dto.getNome() != null) {
-			curso.setNome(dto.getNome());
-		}
-		if (dto.getCargaHoraria() != null) {
-			curso.setCargaHoraria(dto.getCargaHoraria());
-		}
-		if (dto.getNotaMinima() != null) {
-			curso.setNotaMinima(dto.getNotaMinima());
-		}
-		if (dto.getValor() != null) {
-			curso.setValor(dto.getValor());
-		}		
 	}	
 }

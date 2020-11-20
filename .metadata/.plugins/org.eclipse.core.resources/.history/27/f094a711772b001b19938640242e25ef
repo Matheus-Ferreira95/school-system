@@ -39,7 +39,7 @@ public class CursoResource {
 	
 	@GetMapping(value = "/{cursoId}")
 	public ResponseEntity<CursoDTO> findById(@PathVariable Integer cursoId) {
-		CursoDTO cursoDTO = new CursoDTO(cursoService.findById(cursoId));
+		CursoDTO cursoDTO = cursoService.findById(cursoId);
 		return ResponseEntity.ok().body(cursoDTO);
 	}
 	
@@ -65,7 +65,7 @@ public class CursoResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> update(@PathVariable Integer id, @Valid @RequestBody CursoUpdateDTO dto) {
+	public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody CursoUpdateDTO dto) {
 		cursoService.update(id, dto);
 		return ResponseEntity.ok().build();
 	}

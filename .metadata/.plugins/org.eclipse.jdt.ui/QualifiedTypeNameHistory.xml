@@ -38,5 +38,7 @@
     <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
     <fullyQualifiedTypeName name="com.matheusf.project.domain.resources.exceptions.ValidationError"/>
     <fullyQualifiedTypeName name="org.springframework.validation.FieldError"/>
+    <fullyQualifiedTypeName name="com.matheusf.project.domain.service.exceptions.IntegrityException"/>
     <fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
+    <fullyQualifiedTypeName name="com.matheusf.project.domain.dto.CursoUpdateDTO"/>
 </qualifiedTypeNameHistroy>

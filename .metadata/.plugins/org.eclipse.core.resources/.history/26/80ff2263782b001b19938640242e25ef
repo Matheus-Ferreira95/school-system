@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Range;
 public class NewCursoDTO {
 	
 	@NotBlank
-	@Size(min = 1, max = 80)
+	@Size(max = 80)
 	private String nome;
 	
 	@Max(value = 140, message = "A maior carga horária permitida é de 140")
