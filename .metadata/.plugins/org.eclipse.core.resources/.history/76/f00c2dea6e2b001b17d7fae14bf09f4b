@@ -32,8 +32,4 @@ public class CursoService {
 		throw new ResourceNotFoundException("Curso com id " + id + " não encontrado");
 	}
 	
-	public Curso insert(Curso curso) {
-		curso.setId(null);
-		return cursoRepository.save(curso);
-	}
 }

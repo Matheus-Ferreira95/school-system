@@ -686,3 +686,39 @@ Java Model Exception: Java Model Status [StandardError(Intant, Instant, String, 
 	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:183)
 !SUBENTRY 1 org.eclipse.jdt.core 4 969 2020-11-20 17:11:38.236
 !MESSAGE StandardError(Intant, Instant, String, String) [in StandardError [in [Working copy] StandardError.java [in com.matheusf.project.domain.resources.exceptions [in src/main/java [in project]]]]] does not exist
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-11-20 17:17:28.039
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-11-20 17:17:28.053
+!MESSAGE classpath=94 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-11-20 17:17:28.068
+!MESSAGE buffering callback sts4.classpath.kJrktESO project false 94
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-11-20 17:17:28.079
+!MESSAGE executing callback sts4.classpath.kJrktESO 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-11-20 17:17:28.097
+!MESSAGE executing callback sts4.classpath.kJrktESO SUCCESS [done]
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2020-11-20 17:22:32.902
+!MESSAGE The artifact org.hibernate:hibernate-validator:jar:6.1.5.Final has been relocated to org.hibernate.validator:hibernate-validator:jar:6.1.5.Final
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-11-20 17:22:33.633
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-11-20 17:22:33.642
+!MESSAGE classpath=96 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-11-20 17:22:33.650
+!MESSAGE buffering callback sts4.classpath.kJrktESO project false 96
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-11-20 17:22:33.655
+!MESSAGE executing callback sts4.classpath.kJrktESO 1 batched events
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-11-20 17:22:33.666
+!MESSAGE executing callback sts4.classpath.kJrktESO SUCCESS [done]
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2020-11-20 17:22:35.114
+!MESSAGE The artifact org.hibernate:hibernate-validator:jar:6.1.5.Final has been relocated to org.hibernate.validator:hibernate-validator:jar:6.1.5.Final

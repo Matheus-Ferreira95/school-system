@@ -3,8 +3,6 @@ package com.matheusf.project.domain.resources;
 import java.net.URI;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +38,7 @@ public class CursoResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody NewCursoDTO newCurso) {
+	public ResponseEntity<Void> insert(@RequestBody NewCursoDTO newCurso) {
 		Curso curso = toEntity(newCurso);
 		curso = cursoService.insert(curso);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(curso.getId()).toUri();
