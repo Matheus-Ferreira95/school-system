@@ -20,11 +20,10 @@ public class NewCursoDTO {
 	private Integer cargaHoraria;
 	
 	@NotNull
-	@Min(value = 20)
 	private Double valor;
 	
 	@NotNull
-	@Range(min = 100, max = 100, message = "A maior nota possivel é 100")
+	@Range(min = 100, max = 100)
 	private Double notaPrevista;
 	
 	@NotNull

@@ -24,7 +24,7 @@ public class NewCursoDTO {
 	private Double valor;
 	
 	@NotNull
-	@Range(min = 100, max = 100, message = "A maior nota possivel é 100")
+	@Range(min = 100, max = 100)
 	private Double notaPrevista;
 	
 	@NotNull
