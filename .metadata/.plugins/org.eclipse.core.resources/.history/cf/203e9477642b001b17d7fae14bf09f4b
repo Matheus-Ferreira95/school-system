@@ -1,0 +1,78 @@
+package com.matheusf.project.domain.service;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.matheusf.project.domain.Aluno;
+import com.matheusf.project.domain.Curso;
+import com.matheusf.project.domain.Matricula;
+import com.matheusf.project.domain.Turma;
+import com.matheusf.project.domain.repositories.AlunoRepository;
+import com.matheusf.project.domain.repositories.AvaliacaoRepository;
+import com.matheusf.project.domain.repositories.CursoRepository;
+import com.matheusf.project.domain.repositories.MatriculaRepository;
+import com.matheusf.project.domain.repositories.ResultadoRepository;
+import com.matheusf.project.domain.repositories.TurmaRepository;
+
+@Service
+public class DBService {
+
+	@Autowired
+	private AlunoRepository alunoRepository;
+	
+	@Autowired
+	private AvaliacaoRepository avaliacaoRepository;
+	
+	@Autowired
+	private CursoRepository cursoRepository;
+	
+	@Autowired
+	private MatriculaRepository matriculaRepository;
+	
+	@Autowired
+	private ResultadoRepository resultadoRepository;
+	
+	@Autowired
+	private TurmaRepository turmaRepository;
+	
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	
+	public void instantiateDataBase() throws ParseException {
+					
+		Curso c1 = new Curso(null, "Java", 70, 549.99, 100.00, 70.00);
+		Curso c2 = new Curso(null, "SQL", 40, 349.99, 100.00, 60.00);
+				
+		Turma t1 = new Turma(null, 47, sdf.parse("25/11/2020"), 20, c1);
+		Turma t2 = new Turma(null, 48, sdf.parse("30/11/2020"), 15, c2);
+		Turma t3 = new Turma(null, 49, sdf.parse("01/01/2021"), 30, c1);
+		c1.getTurmas().addAll(Arrays.asList(t1, t3));
+		c2.getTurmas().add(t2);
+		
+		cursoRepository.saveAll(Arrays.asList(c1, c2));
+		turmaRepository.saveAll(Arrays.asList(t1, t2, t3));
+		
+		Aluno a1 = new Aluno("59674397060", "Luiz zebra", sdf.parse("08/11/1990"));
+		Aluno a2 = new Aluno("58720103034", "Ana maria", sdf.parse("03/09/1983"));
+		Aluno a3 = new Aluno("03292724031", "Clebinho davista", sdf.parse("12/12/1992"));
+		Aluno a4 = new Aluno("51596904097", "Lacrel", sdf.parse("05/05/1991"));
+		
+		Matricula m1 = new Matricula(t1, a1, sdf.parse("25/11/2020"), 5);
+		Matricula m2 = new Matricula(t2, a1, sdf.parse("30/11/2020"), 3);
+		Matricula m3 = new Matricula(t3, a3, sdf.parse("02/01/2021"), 1);
+		Matricula m4 = new Matricula(t3, a2, sdf.parse("03/01/2021"), 2);
+		Matricula m5 = new Matricula(t2, a4, sdf.parse("01/12/2020"), 1);
+		
+		matriculaRepository.saveAll(Arrays.asList(m1, m2, m3, m4, m5));
+		
+		
+		
+		
+		
+	}
+	
+	
+}

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,8 +49,10 @@ public class Turma implements Serializable{
 		this.curso = curso;
 	}
 	
-	public List<Matricula> getAlunos(){
-		return alunos;
+	public List<Aluno> getAlunos(){
+		return alunos.stream()
+				.map(matricula -> matricula.getAluno())
+				.collect(Collectors.toList());
 	}
 		
 	public List<Avaliacao> getAvaliacoes() {

@@ -1,0 +1,9 @@
+package com.matheusf.project.domain.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.matheusf.project.domain.Aluno;
+
+public interface AlunoRepository extends JpaRepository<Aluno, String>{
+
+}
