@@ -1,0 +1,57 @@
+package com.matheusf.project.domain;
+
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import com.matheusf.project.domain.PK.ResultadoPK;
+
+@Entity
+@Table(name = "tb_resultado")
+public class Resultado {
+
+	@EmbeddedId
+	private ResultadoPK id = new ResultadoPK();
+	
+	private Double notaObtida;
+	
+	public Resultado() {
+	}
+
+	public Resultado(Aluno aluno, Avaliacao avaliacao, Double notaObtida) {
+		id.setAluno(aluno);
+		id.setAvaliacao(avaliacao);
+		this.notaObtida = notaObtida;
+	}
+
+	public Aluno getAluno() {
+		return id.getAluno();
+	}
+	
+	public void setAluno(Aluno aluno) {
+		if (aluno != null) {
+			id.setAluno(aluno);
+		}			
+	}
+	
+	public Avaliacao getAvaliacao() {
+		return id.getAvaliacao();
+	}
+
+	public void setAvaliacao(Avaliacao avaliacao) {
+		if (avaliacao != null) {
+			id.setAvaliacao(avaliacao);
+		}
+	}
+	
+	public Double getNotaObtida() {
+		return notaObtida;
+	}
+
+	public void setNotaObtida(Double notaObtida) {
+		this.notaObtida = notaObtida;
+	}
+	
+	
+	
+}

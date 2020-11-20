@@ -1,0 +1,29 @@
+package com.matheusf.project.domain;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="tb_turma")
+public class Turma {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	private Integer numero;
+	private Date inicio;
+	private Integer vagas;
+	
+	private Curso curso;
+	
+	public Turma() {
+	}
+	
+	
+}
