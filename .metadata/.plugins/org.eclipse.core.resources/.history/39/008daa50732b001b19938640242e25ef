@@ -1,0 +1,67 @@
+package com.matheusf.project.domain.resources;
+
+import java.net.URI;
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.matheusf.project.domain.Curso;
+import com.matheusf.project.domain.dto.CursoDTO;
+import com.matheusf.project.domain.dto.NewCursoDTO;
+import com.matheusf.project.domain.service.CursoService;
+
+@RestController
+@RequestMapping(value = "/cursos")
+public class CursoResource {
+	
+	@Autowired
+	private CursoService cursoService;
+	
+	@GetMapping
+	public ResponseEntity<List<CursoDTO>> findAll() {
+		List<CursoDTO> list = cursoService.findAll();
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/{cursoId}")
+	public ResponseEntity<CursoDTO> findById(@PathVariable Integer cursoId) {
+		CursoDTO cursoDTO = cursoService.findById(cursoId);
+		return ResponseEntity.ok().body(cursoDTO);
+	}
+	
+	@GetMapping(value = "/nome")
+	public ResponseEntity<CursoDTO> findByName(@RequestParam(value = "nome", defaultValue="") String nome) {		
+		Curso curso = cursoService.findByName(nome);
+		CursoDTO dto = new CursoDTO(curso);
+		return ResponseEntity.ok().body(dto);
+	}
+	
+	@PostMapping
+	public ResponseEntity<Void> insert(@Valid @RequestBody NewCursoDTO newCurso) {
+		Curso curso = toEntity(newCurso);
+		curso = cursoService.insert(curso);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(curso.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+	}
+
+	private Curso toEntity(NewCursoDTO newCurso) {
+		Curso curso = new Curso();
+		curso.setNome(newCurso.getNome());
+		curso.setCargaHoraria(newCurso.getCargaHoraria());
+		curso.setValor(newCurso.getValor());
+		curso.setNotaMinima(newCurso.getNotaMinima());
+		curso.setNotaPrevista(newCurso.getNotaPrevista());
+		return curso;
+	}	
+}

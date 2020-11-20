@@ -32,8 +32,12 @@ public class CursoService {
 		throw new ResourceNotFoundException("Curso com id " + id + " não encontrado");
 	}
 	
+	public Curso findByName(String name) {
+		return cursoRepository.findByNomeContainingIgnoreCase(name);
+	}
+	
 	public Curso insert(Curso curso) {
 		curso.setId(null);
 		return cursoRepository.save(curso);
-	}
+	}	
 }
