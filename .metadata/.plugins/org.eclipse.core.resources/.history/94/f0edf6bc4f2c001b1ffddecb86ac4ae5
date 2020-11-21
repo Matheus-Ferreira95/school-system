@@ -1,6 +1,10 @@
 package com.matheusf.project.domain.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.matheusf.project.domain.Curso;
+import com.matheusf.project.domain.Turma;
 
 public class CursoDTO {
 	
@@ -9,7 +13,8 @@ public class CursoDTO {
 	private Integer cargaHoraria;
 	private Double valor;
 	private Double notaPrevista;
-	private Double notaMinima;	
+	private Double notaMinima;
+	private List<Turma> turmas = new ArrayList<>();	
 	
 	public CursoDTO() {
 	}
@@ -21,6 +26,7 @@ public class CursoDTO {
 		valor = curso.getValor();
 		notaPrevista = curso.getNotaPrevista();
 		notaMinima = curso.getNotaMinima();
+		turmas = curso.getTurmas();
 	}
 
 	public Integer getId() {
@@ -45,5 +51,9 @@ public class CursoDTO {
 
 	public Double getNotaMinima() {
 		return notaMinima;
-	}	
+	}
+
+	public List<Turma> getTurmas() {
+		return turmas;
+	}
 }
