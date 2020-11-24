@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.matheusf.project.domain.service.DBService;
+import com.matheusf.project.services.DBService;
 
 @Configuration
 @Profile("test")
