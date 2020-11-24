@@ -1,0 +1,108 @@
+package com.matheusf.project.domain.service;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.matheusf.project.domain.Aluno;
+import com.matheusf.project.domain.Avaliacao;
+import com.matheusf.project.domain.Curso;
+import com.matheusf.project.domain.Matricula;
+import com.matheusf.project.domain.Resultado;
+import com.matheusf.project.domain.Turma;
+import com.matheusf.project.domain.repositories.AlunoRepository;
+import com.matheusf.project.domain.repositories.AvaliacaoRepository;
+import com.matheusf.project.domain.repositories.CursoRepository;
+import com.matheusf.project.domain.repositories.MatriculaRepository;
+import com.matheusf.project.domain.repositories.ResultadoRepository;
+import com.matheusf.project.domain.repositories.TurmaRepository;
+
+@Service
+public class DBService {
+
+	@Autowired
+	private AlunoRepository alunoRepository;
+	
+	@Autowired
+	private AvaliacaoRepository avaliacaoRepository;
+	
+	@Autowired
+	private CursoRepository cursoRepository;
+	
+	@Autowired
+	private MatriculaRepository matriculaRepository;
+	
+	@Autowired
+	private ResultadoRepository resultadoRepository;
+	
+	@Autowired
+	private TurmaRepository turmaRepository;
+	
+	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	
+	public void instantiateDataBase() throws ParseException {
+					
+		Curso c1 = new Curso(null, "Java", 70, 549.99, 100.00, 70.00);
+		Curso c2 = new Curso(null, "SQL", 40, 349.99, 100.00, 60.00);
+				
+		Turma t1 = new Turma(null, 47, sdf.parse("25/11/2020"), 20, c1);
+		Turma t2 = new Turma(null, 48, sdf.parse("30/11/2020"), 15, c2);
+		Turma t3 = new Turma(null, 49, sdf.parse("01/01/2021"), 30, c1);
+		c1.getTurmas().addAll(Arrays.asList(t1, t3));
+		c2.getTurmas().add(t2);
+		
+		cursoRepository.saveAll(Arrays.asList(c1, c2));
+		turmaRepository.saveAll(Arrays.asList(t1, t2, t3));
+		
+		Aluno a1 = new Aluno("59674397060", "Luiz zebra", sdf.parse("08/11/1990"));
+		Aluno a2 = new Aluno("58720103034", "Ana maria", sdf.parse("03/09/1983"));
+		Aluno a3 = new Aluno("03292724031", "Clebinho davista", sdf.parse("12/12/1992"));
+		Aluno a4 = new Aluno("51596904097", "Lacrel", sdf.parse("05/05/1991"));
+		Aluno a5 = new Aluno("83735897088", "mity", sdf.parse("09/09/1999"));
+		
+		alunoRepository.saveAll(Arrays.asList(a1, a2, a3, a4, a5));
+		
+		Matricula m1 = new Matricula(t1, a1, sdf.parse("25/11/2020"), 5);
+		Matricula m2 = new Matricula(t2, a1, sdf.parse("30/11/2020"), 3);
+		Matricula m3 = new Matricula(t3, a3, sdf.parse("02/01/2021"), 1);
+		Matricula m4 = new Matricula(t3, a2, sdf.parse("03/01/2021"), 2);
+		Matricula m5 = new Matricula(t1, a4, sdf.parse("01/12/2020"), 1);
+		Matricula m6 = new Matricula(t1, a5, sdf.parse("03/12/2020"), 1);
+		
+		matriculaRepository.saveAll(Arrays.asList(m1, m2, m3, m4, m5, m6));
+		
+		Avaliacao av1 = new Avaliacao(null, 25.00, sdf.parse("05/12/2020"), t1);
+		Avaliacao av2 = new Avaliacao(null, 25.00, sdf.parse("15/12/2020"), t1);
+		Avaliacao av3 = new Avaliacao(null, 25.00, sdf.parse("20/12/2020"), t1);
+		Avaliacao av4 = new Avaliacao(null, 25.00, sdf.parse("05/01/2021"), t1);
+		Avaliacao av5 = new Avaliacao(null, 100.00, sdf.parse("05/01/2021"), t2);
+		Avaliacao av6 = new Avaliacao(null, 100.00, sdf.parse("12/01/2021"), t3);
+		
+		t1.getAvaliacoes().addAll(Arrays.asList(av1, av2, av3, av4));
+		t2.getAvaliacoes().add(av5);
+		t3.getAvaliacoes().add(av6);
+		
+		avaliacaoRepository.saveAll(Arrays.asList(av1, av2, av3, av4, av5, av6));
+		
+		Resultado r1 = new Resultado(a1, av1, 22.50);
+		Resultado r2 = new Resultado(a1, av2, 15.50);
+		Resultado r3 = new Resultado(a1, av3, 10.50);
+		Resultado r4 = new Resultado(a1, av4, 19.50);
+		Resultado r5 = new Resultado(a1, av1, 22.50);
+		Resultado r6 = new Resultado(a1, av5, 70.00);
+		Resultado r7 = new Resultado(a2, av6, 50.00);
+		Resultado r8 = new Resultado(a3, av6, 60.00);	
+		Resultado r9 = new Resultado(a4, av1, 2.00);
+		Resultado r10 = new Resultado(a4, av2, 12.00);
+		Resultado r11 = new Resultado(a4, av3, 7.00);
+		Resultado r12 = new Resultado(a4, av4, 20.00);
+		Resultado r13 = new Resultado(a5, av1, 20.00);
+		
+		resultadoRepository.saveAll(Arrays.asList(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13));		
+	}
+	
+	
+}

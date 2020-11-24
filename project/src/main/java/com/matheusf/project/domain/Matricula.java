@@ -14,7 +14,7 @@ import com.matheusf.project.domain.PK.MatriculaPK;
 @Table(name="tb_matricula")
 public class Matricula implements Serializable{
 	private static final long serialVersionUID = 1L;
-
+	
 	@JsonIgnore
 	@EmbeddedId
 	private MatriculaPK id = new MatriculaPK();
@@ -25,8 +25,7 @@ public class Matricula implements Serializable{
 	public Matricula() {
 	}
 	
-	public Matricula(Turma turma, Aluno aluno, Date data, Integer prestacoes) {	
-		super();
+	public Matricula(Turma turma, Aluno aluno, Date data, Integer prestacoes) {			
 		id.setTurma(turma);
 		id.setAluno(aluno);
 		this.data = data;
@@ -67,6 +66,11 @@ public class Matricula implements Serializable{
 
 	public void setPrestacoes(Integer prestacoes) {
 		this.prestacoes = prestacoes;
+	}
+	
+	@Override
+	public String toString() {
+		return "Matricula [id=" + id + ", data=" + data + ", prestacoes=" + prestacoes + "]";
 	}
 
 	@Override

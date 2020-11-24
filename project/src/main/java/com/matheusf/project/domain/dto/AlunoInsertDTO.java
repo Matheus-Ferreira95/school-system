@@ -6,7 +6,6 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.matheusf.project.domain.Matricula;
-import com.matheusf.project.domain.Turma;
 
 public class AlunoInsertDTO {
 	
@@ -22,9 +21,7 @@ public class AlunoInsertDTO {
 	private String nascimento;
 	
 	private Matricula matricula;
-	
-	private Turma turma;
-	
+		
 	public AlunoInsertDTO() {
 	}
 
@@ -58,13 +55,5 @@ public class AlunoInsertDTO {
 
 	public void setMatricula(Matricula matricula) {
 		this.matricula = matricula;
-	}
-
-	public Turma getTurma() {
-		return turma;
-	}
-
-	public void setTurma(Turma turma) {
-		this.turma = turma;
-	}
+	}	
 }

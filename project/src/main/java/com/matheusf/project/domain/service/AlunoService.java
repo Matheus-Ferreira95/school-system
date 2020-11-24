@@ -1,9 +1,16 @@
 package com.matheusf.project.domain.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.matheusf.project.domain.Aluno;
+import com.matheusf.project.domain.Matricula;
+import com.matheusf.project.domain.Turma;
 import com.matheusf.project.domain.repositories.AlunoRepository;
+import com.matheusf.project.domain.repositories.MatriculaRepository;
+import com.matheusf.project.domain.service.exceptions.DoMainException;
 
 @Service
 public class AlunoService {
@@ -11,4 +18,47 @@ public class AlunoService {
 	@Autowired
 	private AlunoRepository alunoRepository;
 	
+	@Autowired
+	private MatriculaRepository matriculaRepository;
+	
+	@Autowired
+	private TurmaService turmaService;
+
+	public Aluno matricular(Aluno entity, Matricula matricula) {			
+		if(temVaga(matricula.getTurma().getId()) && cpfNotExists(entity.getCpf()) && ageValid(entity.getNascimento())) {
+			matricula.setData(new Date(System.currentTimeMillis()));		
+			matricula.setAluno(entity);	
+			entity = alunoRepository.save(entity);
+			matriculaRepository.save(matricula);	
+			return entity;	
+		}
+		throw new DoMainException("Não há vagas disponiveis para esta turma");	
+	}
+	
+	private boolean temVaga(Integer turmaId) {
+		Turma turma = turmaService.findById(turmaId);
+		if (turma.getVagas() > 0) {
+			turma.setVagas(turma.getVagas()-1);
+			return true;
+		}
+		return false;
+	}	
+	
+	private boolean cpfNotExists(String cpf) {
+		Aluno aluno = alunoRepository.findByCpf(cpf);
+		if (aluno != null) {
+			throw new DoMainException("CPF já cadastrado no sistema! Por favor informe um novo CPF");
+		}
+		return true;
+	}
+	
+	private boolean ageValid(Date nascimento) {
+		Date now = new Date(System.currentTimeMillis());
+		long duration = now.getTime() - nascimento.getTime();
+		int years = (int) (duration / 1000 / 60 / 60 / 24 / 365);
+		if (years < 18) {
+			throw new DoMainException("Para se cadastrar nesse curso é necessário ter mais de 18 anos");
+		}
+		return true;
+	}
 }

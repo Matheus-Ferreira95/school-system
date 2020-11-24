@@ -1,0 +1,28 @@
+package com.matheusf.project.domain.service;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.matheusf.project.domain.Aluno;
+import com.matheusf.project.domain.Matricula;
+import com.matheusf.project.domain.repositories.AlunoRepository;
+import com.matheusf.project.domain.repositories.MatriculaRepository;
+
+@Service
+public class AlunoService {
+
+	@Autowired
+	private AlunoRepository alunoRepository;
+	
+	@Autowired
+	private MatriculaRepository matriculaRepository;
+
+	public Aluno matricular(Aluno entity, Matricula matricula) {
+		matricula.setData(new Date(System.currentTimeMillis()));
+		matricula.setAluno(entity);		
+		matriculaRepository.save(matricula);	
+		return alunoRepository.save(entity);		
+	}	
+}

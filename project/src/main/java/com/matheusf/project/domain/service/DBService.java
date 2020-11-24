@@ -48,7 +48,7 @@ public class DBService {
 		Curso c1 = new Curso(null, "Java", 70, 549.99, 100.00, 70.00);
 		Curso c2 = new Curso(null, "SQL", 40, 349.99, 100.00, 60.00);
 				
-		Turma t1 = new Turma(null, 47, sdf.parse("25/11/2020"), 20, c1);
+		Turma t1 = new Turma(null, 47, sdf.parse("25/11/2020"), 2, c1);
 		Turma t2 = new Turma(null, 48, sdf.parse("30/11/2020"), 15, c2);
 		Turma t3 = new Turma(null, 49, sdf.parse("01/01/2021"), 30, c1);
 		c1.getTurmas().addAll(Arrays.asList(t1, t3));

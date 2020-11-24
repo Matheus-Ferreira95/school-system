@@ -1,0 +1,120 @@
+package com.matheusf.project.domain;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name="tb_aluno")
+public class Aluno implements Serializable{
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(unique = true)
+	private String cpf;
+	
+	private String nome;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	private Date nascimento;
+	
+	@OneToMany(mappedBy="id.aluno")
+	private List<Matricula> turmas = new ArrayList<>();
+	
+	@OneToMany(mappedBy="id.aluno")
+	private List<Resultado> avaliacoes = new ArrayList<>();
+	
+	public Aluno() {
+	}
+
+	public Aluno(String cpf, String nome, Date nascimento) {	
+		this.cpf = cpf;
+		this.nome = nome;
+		this.nascimento = nascimento;		
+	}
+	
+	@JsonIgnore
+	public List<Avaliacao> getAvaliacoes() {
+		return avaliacoes.stream()
+				.map(x -> x.getAvaliacao())
+				.collect(Collectors.toList());
+	}
+	
+	@JsonIgnore
+	public Double getNotaFinal() {
+		return avaliacoes.stream()
+				.mapToDouble(result -> result.getNotaObtida())
+				.sum();				
+	}
+	
+	@JsonIgnore
+	public List<Turma> getTurmas() {
+		return turmas.stream()
+				.map(matricula -> matricula.getTurma()).collect(Collectors.toList());
+	}	
+	
+	@JsonIgnore
+	public List<Matricula> getMatricula(){
+		return turmas;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Date getNascimento() {
+		return nascimento;
+	}
+
+	public void setNascimento(Date nascimento) {
+		this.nascimento = nascimento;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Aluno other = (Aluno) obj;
+		if (cpf == null) {
+			if (other.cpf != null)
+				return false;
+		} else if (!cpf.equals(other.cpf))
+			return false;
+		return true;
+	}
+}
