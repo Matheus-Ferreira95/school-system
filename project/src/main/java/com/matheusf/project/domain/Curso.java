@@ -41,6 +41,11 @@ public class Curso implements Serializable{
 		this.notaPrevista = notaPrevista;
 		this.notaMinima = notaMinima;
 	}
+		
+	@Override
+	public String toString() {
+		return "Curso [id=" + id + ", nome=" + nome + "]";
+	}
 
 	public Integer getId() {
 		return id;

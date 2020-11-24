@@ -1,0 +1,57 @@
+package com.matheusf.project.domain.dto;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+import com.matheusf.project.domain.Curso;
+
+public class TurmaDTO {
+	
+	@NotNull
+	private Integer numero;
+	
+	@NotNull
+	//@Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}")
+	private Date inicio;	
+	
+	@Min(10)
+	private Integer vagas;
+	
+	private Curso curso;
+	
+	public TurmaDTO(Integer numero, String inicio, Integer vagas, Curso curso) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		this.numero = numero;
+		this.inicio = sdf.parse(inicio);
+		this.vagas = vagas;		
+		this.curso = curso;
+	}
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
+
+	public Date getInicio() {
+		return inicio;
+	}
+
+	public void setInicio(Date inicio) {
+		this.inicio = inicio;
+	}
+
+	public Integer getVagas() {
+		return vagas;
+	}
+
+	public void setVagas(Integer vagas) {
+		this.vagas = vagas;
+	}
+}

@@ -8,4 +8,5 @@ import com.matheusf.project.domain.Turma;
 @Repository
 public interface TurmaRepository extends JpaRepository<Turma, Integer>{
 
+	Turma findByNumero(Integer numero);
 }

@@ -17,7 +17,7 @@ import com.matheusf.project.domain.dto.CursoDTO;
 import com.matheusf.project.domain.dto.CursoTurmaDTO;
 import com.matheusf.project.domain.dto.CursoUpdateDTO;
 import com.matheusf.project.domain.repositories.CursoRepository;
-import com.matheusf.project.domain.service.exceptions.IntegrityException;
+import com.matheusf.project.domain.service.exceptions.DoMainException;
 import com.matheusf.project.domain.service.exceptions.ResourceNotFoundException;
 
 @Service
@@ -61,7 +61,7 @@ public class CursoService {
 			cursoRepository.deleteById(id);		
 		}
 		catch (DataIntegrityViolationException e) {
-			throw new IntegrityException("Não é possivel excluir um curso que há turmas");
+			throw new DoMainException("Não é possivel excluir um curso que há turmas");
 		}		
 	}	
 	

@@ -11,7 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.matheusf.project.domain.service.exceptions.IntegrityException;
+import com.matheusf.project.domain.service.exceptions.DoMainException;
 import com.matheusf.project.domain.service.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -34,8 +34,8 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(vee);
 	}
 	
-	@ExceptionHandler(IntegrityException.class)
-	public ResponseEntity<StandardError> integrityException(IntegrityException e, HttpServletRequest request) {
+	@ExceptionHandler(DoMainException.class)
+	public ResponseEntity<StandardError> integrityException(DoMainException e, HttpServletRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError see = new StandardError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(see);
