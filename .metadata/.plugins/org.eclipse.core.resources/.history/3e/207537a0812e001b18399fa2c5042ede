@@ -22,7 +22,7 @@ public class AvaliacaoService {
 	}
 
 	public List<Avaliacao> findByIdTurma(Integer id) {
-		turmaService.findById(id);
+		//turmaService.findById(id);
 		return avaliacaoRepository.findTurmas(id);
 	}
 	

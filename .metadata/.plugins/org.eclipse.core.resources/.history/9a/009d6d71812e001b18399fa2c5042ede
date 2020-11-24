@@ -13,4 +13,5 @@ public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Integer>{
 
 	@Query("SELECT obj FROM Avaliacao obj where obj.turma.id = :id")
 	List<Avaliacao> findTurmas(Integer id);
+
 }

@@ -4,7 +4,6 @@ import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -31,10 +30,9 @@ public class AvaliacaoResource {
 	private AvaliacaoService avaliacaoService;
 	
 	@GetMapping("/{idTurma}")
-	public ResponseEntity<List<AvaliacaoDTO>> findByIdTurma(@PathVariable Integer idTurma) {
-		List<Avaliacao> list = avaliacaoService.findByIdTurma(idTurma);
-		List<AvaliacaoDTO> listDTO = list.stream().map(x -> new AvaliacaoDTO(x)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDTO);
+	public ResponseEntity<List<AvaliacaoDTO>> findByIdTurma(@PathVariable Integer id) {
+		List<Avaliacao> list = avaliacaoService.findByIdTurma(id);
+		
 	}
 	
 	@PostMapping

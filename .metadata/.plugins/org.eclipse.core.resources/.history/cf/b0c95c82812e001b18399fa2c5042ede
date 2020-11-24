@@ -13,16 +13,12 @@ public class AvaliacaoService {
 
 	@Autowired
 	private AvaliacaoRepository avaliacaoRepository;
-	
-	@Autowired
-	private TurmaService turmaService;
 
 	public Avaliacao insert(Avaliacao avali) {
 		return avaliacaoRepository.save(avali);		
 	}
 
 	public List<Avaliacao> findByIdTurma(Integer id) {
-		turmaService.findById(id);
 		return avaliacaoRepository.findTurmas(id);
 	}
 	
