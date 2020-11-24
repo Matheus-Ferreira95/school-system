@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="tb_aluno")
@@ -44,14 +43,12 @@ public class Aluno implements Serializable{
 		this.nascimento = nascimento;		
 	}
 	
-	@JsonIgnore
 	public List<Avaliacao> getAvaliacoes() {
 		return avaliacoes.stream()
 				.map(x -> x.getAvaliacao())
 				.collect(Collectors.toList());
 	}
 	
-	@JsonIgnore
 	public Double getNotaFinal() {
 		return avaliacoes.stream()
 				.mapToDouble(result -> result.getNotaObtida())
@@ -81,8 +78,7 @@ public class Aluno implements Serializable{
 	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
 	}
-	
-	@JsonIgnore
+
 	public List<Turma> getTurmas() {
 		return turmas.stream()
 				.map(matricula -> matricula.getTurma()).collect(Collectors.toList());

@@ -13,6 +13,6 @@ public class AlunoResource {
 	@Autowired
 	private AlunoService alunoService;
 	
-		
+	
 
 }

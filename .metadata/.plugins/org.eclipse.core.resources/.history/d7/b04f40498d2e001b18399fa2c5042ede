@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.matheusf.project.domain.Aluno;
 import com.matheusf.project.domain.Turma;
 import com.matheusf.project.domain.dto.TurmaDTO;
 import com.matheusf.project.domain.dto.TurmaFindDTO;
@@ -65,9 +64,7 @@ public class TurmaResource {
 	
 	@GetMapping(value="/alunos/{idTurma}")
 	public ResponseEntity<List<Aluno>> findAlunos(@PathVariable Integer idTurma) {
-		Turma turma = turmaService.findById(idTurma);
-		List<Aluno> list = turma.getAlunos();
-		return ResponseEntity.ok().body(list);
+		
 	}
 
 	private Turma toEntity(TurmaDTO turmaDTO) throws ParseException {		

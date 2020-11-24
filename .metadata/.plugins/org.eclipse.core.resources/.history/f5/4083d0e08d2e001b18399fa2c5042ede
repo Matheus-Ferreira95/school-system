@@ -57,7 +57,8 @@ public class Turma implements Serializable{
 		this.vagas = vagas;
 		this.curso = curso;
 	}
-		
+	
+	@JsonIgnore
 	public List<Aluno> getAlunos(){
 		return alunos.stream().map(x -> x.getAluno()).collect(Collectors.toList());
 	}

@@ -81,8 +81,7 @@ public class Aluno implements Serializable{
 	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
 	}
-	
-	@JsonIgnore
+
 	public List<Turma> getTurmas() {
 		return turmas.stream()
 				.map(matricula -> matricula.getTurma()).collect(Collectors.toList());

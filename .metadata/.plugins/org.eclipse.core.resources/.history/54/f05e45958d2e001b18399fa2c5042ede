@@ -7,7 +7,6 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matheusf.project.domain.PK.MatriculaPK;
 
 @Entity
@@ -15,7 +14,6 @@ import com.matheusf.project.domain.PK.MatriculaPK;
 public class Matricula implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	@JsonIgnore
 	@EmbeddedId
 	private MatriculaPK id = new MatriculaPK();
 	
