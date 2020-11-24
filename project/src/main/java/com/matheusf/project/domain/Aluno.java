@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="tb_aluno")
 public class Aluno implements Serializable{
@@ -22,6 +24,8 @@ public class Aluno implements Serializable{
 	private String cpf;
 	
 	private String nome;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date nascimento;
 	
 	@OneToMany(mappedBy="id.aluno")

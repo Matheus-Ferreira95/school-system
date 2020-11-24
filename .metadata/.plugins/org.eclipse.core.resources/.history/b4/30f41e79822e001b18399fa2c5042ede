@@ -1,0 +1,6 @@
+package com.matheusf.project.domain.dto;
+
+public class AlunoDTO {
+	
+	private 	
+}

@@ -3,7 +3,6 @@ package com.matheusf.project.domain;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,13 +42,15 @@ public class Avaliacao {
 		this.turma = turma;
 	}
 	
-	public List<Aluno> getAlunos() {
-		return alunos.stream()
-				.map(avaliacao -> avaliacao.getAluno())
-				.collect(Collectors.toList());
-	}
-	
-	
+	public List<String> getAlunos() {
+		List<String> list = new ArrayList<>();
+		alunos.stream().forEach(x -> {			
+			String nome = x.getAluno().getNome();
+			Double nota = x.getNotaObtida();
+			list.add(nome + ": Nota: " + nota);			
+		});		
+		return list;				
+	}	
 	
 	public Integer getId() {
 		return id;

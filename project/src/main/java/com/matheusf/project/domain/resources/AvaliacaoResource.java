@@ -44,6 +44,13 @@ public class AvaliacaoResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(avali.getId()).toUri();
 		return ResponseEntity.created(uri).build();		
 	}
+	
+	@GetMapping("/lista/{idAvaliacao}")
+	public ResponseEntity <List<String>> findAlunos(@PathVariable Integer idAvaliacao){
+			Avaliacao avali = avaliacaoService.findAlunos(idAvaliacao);
+			List<String> nomes = avali.getAlunos();							
+			return ResponseEntity.ok().body(nomes);		
+	}
 
 	private Avaliacao toEntity(@Valid AvaliacaoInsertDTO dto) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

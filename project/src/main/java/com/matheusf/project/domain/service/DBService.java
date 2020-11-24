@@ -61,16 +61,18 @@ public class DBService {
 		Aluno a2 = new Aluno("58720103034", "Ana maria", sdf.parse("03/09/1983"));
 		Aluno a3 = new Aluno("03292724031", "Clebinho davista", sdf.parse("12/12/1992"));
 		Aluno a4 = new Aluno("51596904097", "Lacrel", sdf.parse("05/05/1991"));
+		Aluno a5 = new Aluno("83735897088", "mity", sdf.parse("09/09/1999"));
 		
-		alunoRepository.saveAll(Arrays.asList(a1, a2, a3, a4));
+		alunoRepository.saveAll(Arrays.asList(a1, a2, a3, a4, a5));
 		
 		Matricula m1 = new Matricula(t1, a1, sdf.parse("25/11/2020"), 5);
 		Matricula m2 = new Matricula(t2, a1, sdf.parse("30/11/2020"), 3);
 		Matricula m3 = new Matricula(t3, a3, sdf.parse("02/01/2021"), 1);
 		Matricula m4 = new Matricula(t3, a2, sdf.parse("03/01/2021"), 2);
 		Matricula m5 = new Matricula(t1, a4, sdf.parse("01/12/2020"), 1);
+		Matricula m6 = new Matricula(t1, a5, sdf.parse("03/12/2020"), 1);
 		
-		matriculaRepository.saveAll(Arrays.asList(m1, m2, m3, m4, m5));
+		matriculaRepository.saveAll(Arrays.asList(m1, m2, m3, m4, m5, m6));
 		
 		Avaliacao av1 = new Avaliacao(null, 25.00, sdf.parse("05/12/2020"), t1);
 		Avaliacao av2 = new Avaliacao(null, 25.00, sdf.parse("15/12/2020"), t1);
@@ -97,8 +99,9 @@ public class DBService {
 		Resultado r10 = new Resultado(a4, av2, 12.00);
 		Resultado r11 = new Resultado(a4, av3, 7.00);
 		Resultado r12 = new Resultado(a4, av4, 20.00);
+		Resultado r13 = new Resultado(a5, av1, 20.00);
 		
-		resultadoRepository.saveAll(Arrays.asList(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12));		
+		resultadoRepository.saveAll(Arrays.asList(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13));		
 	}
 	
 	
