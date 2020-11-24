@@ -57,7 +57,7 @@ public class TurmaResource {
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
 		
 		Page<Turma> list = turmaService.findPage(page, linesPerPage, orderBy, direction);
-		Page<TurmaFindDTO> listDTO = list.map(turma -> new TurmaFindDTO(turma));
+		Page<TurmaDTO> listDTO = list.map(turma -> new TurmaDTO(turma));
 		return ResponseEntity.ok().body(listDTO);
 	}
 

@@ -1,0 +1,5 @@
+package com.matheusf.project.domain.dto;
+
+public class AlunoInsertDTO {
+
+}

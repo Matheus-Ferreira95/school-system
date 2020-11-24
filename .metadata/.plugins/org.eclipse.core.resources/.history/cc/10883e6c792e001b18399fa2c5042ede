@@ -4,11 +4,7 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.matheusf.project.domain.Curso;
 import com.matheusf.project.domain.Turma;
@@ -25,25 +21,17 @@ public class TurmaService {
 	@Autowired
 	private CursoService cursoService;	
 
-	@Transactional
 	public Turma insert(Turma turma) {
 		cursoService.findById(turma.getCurso().getId());		
 		return turmaRepository.save(turma);		
 	}
 	
-	@Transactional(readOnly=true)
 	public Turma findById(Integer id) {
 		Optional<Turma> opt = turmaRepository.findById(id);
 		if (!opt.isPresent()) {
 			throw new ResourceNotFoundException("Turma com id " + id + " não encontrada");
 		}
 		return opt.get();
-	}
-	
-	@Transactional
-	public Page<Turma> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		return turmaRepository.findAll(pageRequest);
 	}
 
 	public void checkStart(Date inicio) {

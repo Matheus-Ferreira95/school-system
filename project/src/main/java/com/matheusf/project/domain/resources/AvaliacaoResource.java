@@ -1,0 +1,44 @@
+package com.matheusf.project.domain.resources;
+
+import java.net.URI;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.matheusf.project.domain.Avaliacao;
+import com.matheusf.project.domain.dto.AvaliacaoDTO;
+import com.matheusf.project.domain.service.AvaliacaoService;
+
+@RestController
+@RequestMapping(value = "/avaliacoes")
+public class AvaliacaoResource {
+
+	@Autowired
+	private AvaliacaoService avaliacaoService;
+	
+	@PostMapping
+	public ResponseEntity<Void> insert(@Valid AvaliacaoDTO dto) throws ParseException {
+		Avaliacao avali = toEntity(dto);
+		avali = avaliacaoService.insert(avali);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(avali.getId()).toUri();
+		return ResponseEntity.created(uri).build();		
+	}
+
+	private Avaliacao toEntity(@Valid AvaliacaoDTO dto) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Avaliacao avali = new Avaliacao();
+		avali.setData(sdf.parse(dto.getData()));
+		avali.setId(null);
+		avali.setNota(dto.getNota());
+		avali.setTurma(dto.getTurma());
+		return avali;
+	}
+}

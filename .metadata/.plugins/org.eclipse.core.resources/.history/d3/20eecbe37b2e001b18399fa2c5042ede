@@ -1,0 +1,17 @@
+package com.matheusf.project.domain.dto;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+public class AvaliacaoDTO {
+	
+	@NotNull
+	@Max(100)
+	private Double nota;
+	
+	@NotNull
+	@Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "deve estar no formato dd/MM/yyyy")
+	private String data;
+	
+}
