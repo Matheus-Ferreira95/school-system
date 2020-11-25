@@ -1,0 +1,16 @@
+package com.matheusf.project.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.matheusf.project.domain.Matricula;
+import com.matheusf.project.domain.PK.MatriculaPK;
+
+@Repository
+public interface MatriculaRepository extends JpaRepository<Matricula, MatriculaPK>{
+
+	@Query("DELETE obj FROM Matricula obj WHERE obj.aluno.id = :alunoId AND obj.turma.id = :turmaId")
+	void desmatricular(Integer alunoId, Integer turmaId);
+
+}

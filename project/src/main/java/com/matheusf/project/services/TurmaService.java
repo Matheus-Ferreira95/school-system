@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.matheusf.project.domain.Curso;
 import com.matheusf.project.domain.Turma;
 import com.matheusf.project.repositories.TurmaRepository;
-import com.matheusf.project.service.exceptions.DoMainException;
-import com.matheusf.project.service.exceptions.ResourceNotFoundException;
+import com.matheusf.project.services.exceptions.DoMainException;
+import com.matheusf.project.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class TurmaService {

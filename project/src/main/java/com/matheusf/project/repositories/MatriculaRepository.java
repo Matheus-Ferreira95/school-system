@@ -1,12 +1,21 @@
 package com.matheusf.project.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.matheusf.project.domain.Matricula;
 import com.matheusf.project.domain.PK.MatriculaPK;
 
 @Repository
 public interface MatriculaRepository extends JpaRepository<Matricula, MatriculaPK>{
+
+	@Modifying(clearAutomatically = true)
+	@Transactional
+	@Query(value = "DELETE FROM tb_matricula WHERE ALUNO_ID =:alunoId AND TURMA_ID =:turmaId", nativeQuery = true)
+	void desmatricular(@Param("alunoId") Integer alunoId, @Param("turmaId") Integer turmaId);
 
 }

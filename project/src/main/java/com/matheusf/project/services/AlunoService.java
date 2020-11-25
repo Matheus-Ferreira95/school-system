@@ -1,6 +1,7 @@
 package com.matheusf.project.services;
 
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,8 @@ import com.matheusf.project.domain.Matricula;
 import com.matheusf.project.domain.Turma;
 import com.matheusf.project.repositories.AlunoRepository;
 import com.matheusf.project.repositories.MatriculaRepository;
-import com.matheusf.project.service.exceptions.DoMainException;
+import com.matheusf.project.services.exceptions.DoMainException;
+import com.matheusf.project.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class AlunoService {
@@ -60,5 +62,16 @@ public class AlunoService {
 			throw new DoMainException("Para se cadastrar nesse curso é necessário ter mais de 18 anos");
 		}
 		return true;
+	}
+	
+	public Aluno findById(Integer id) {
+		Optional<Aluno> opt = alunoRepository.findById(id);
+		return opt.orElseThrow(() -> new ResourceNotFoundException("Não foi encontrado matrícula de aluno com id " + id));
+	}
+
+	public void desmatricular(Integer alunoId, Integer turmaId) {
+		findById(alunoId);
+		turmaService.findById(turmaId);
+		matriculaRepository.desmatricular(alunoId, turmaId);		
 	}
 }

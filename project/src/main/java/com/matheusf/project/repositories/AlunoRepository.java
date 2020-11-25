@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.matheusf.project.domain.Aluno;
 
 @Repository
-public interface AlunoRepository extends JpaRepository<Aluno, String>{
+public interface AlunoRepository extends JpaRepository<Aluno, Integer>{
 
 	@Transactional(readOnly=true)
 	Aluno findByCpf(String cpf);

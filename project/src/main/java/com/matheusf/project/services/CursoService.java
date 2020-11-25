@@ -17,8 +17,8 @@ import com.matheusf.project.domain.dto.CursoDTO;
 import com.matheusf.project.domain.dto.CursoTurmaDTO;
 import com.matheusf.project.domain.dto.CursoUpdateDTO;
 import com.matheusf.project.repositories.CursoRepository;
-import com.matheusf.project.service.exceptions.DoMainException;
-import com.matheusf.project.service.exceptions.ResourceNotFoundException;
+import com.matheusf.project.services.exceptions.DoMainException;
+import com.matheusf.project.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class CursoService {

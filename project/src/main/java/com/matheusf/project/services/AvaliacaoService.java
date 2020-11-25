@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.matheusf.project.domain.Avaliacao;
 import com.matheusf.project.repositories.AvaliacaoRepository;
-import com.matheusf.project.service.exceptions.DoMainException;
+import com.matheusf.project.services.exceptions.DoMainException;
 
 @Service
 public class AvaliacaoService {

@@ -11,8 +11,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.matheusf.project.service.exceptions.DoMainException;
-import com.matheusf.project.service.exceptions.ResourceNotFoundException;
+import com.matheusf.project.services.exceptions.DoMainException;
+import com.matheusf.project.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
