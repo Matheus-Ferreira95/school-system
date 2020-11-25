@@ -18,7 +18,7 @@ public interface MatriculaRepository extends JpaRepository<Matricula, MatriculaP
 	@Query(value = "DELETE FROM tb_matricula WHERE ALUNO_ID =:alunoId AND TURMA_ID =:turmaId", nativeQuery = true)
 	void desmatricular(@Param("alunoId") Integer alunoId, @Param("turmaId") Integer turmaId);
 
-	@Transactional(readOnly=true)
-	@Query(value = "SELECT * FROM tb_matricula WHERE ALUNO_ID =:alunoId AND TURMA_ID =:turmaId", nativeQuery = true)
+	@Transactional
+	@Query(value = "SELECT FROM tb_matricula WHERE ALUNO_ID =:alunoId AND TURMA_ID=:turmaId", nativeQuery = true)
 	Matricula buscarMatricula(@Param("alunoId") Integer alunoId, @Param("turmaId") Integer turmaId);	
 }

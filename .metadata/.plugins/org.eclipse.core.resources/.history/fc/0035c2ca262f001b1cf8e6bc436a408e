@@ -71,12 +71,7 @@ public class AlunoService {
 
 	public void desmatricular(Integer alunoId, Integer turmaId) {
 		findById(alunoId);
-		Turma turma = turmaService.findById(turmaId);
-		Matricula matricula = matriculaRepository.buscarMatricula(alunoId, turmaId);
-		if (matricula == null) {
-			throw new ResourceNotFoundException("Matricula para a turma informada não encontrada");		
-		}
-		matriculaRepository.desmatricular(alunoId, turmaId);			
-		turmaService.update(turma);				
-	}	
+		turmaService.findById(turmaId);
+		matriculaRepository.desmatricular(alunoId, turmaId);		
+	}
 }

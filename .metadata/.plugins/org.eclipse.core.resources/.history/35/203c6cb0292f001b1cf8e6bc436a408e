@@ -60,9 +60,4 @@ public class TurmaService {
 			throw new DoMainException("Já existente curso de " + curso.getNome() + " com numero " + turma.getNumero());
 		}		
 	}
-	
-	public void update(Turma turma) {
-		turma.setVagas(turma.getVagas()+1);
-		turmaRepository.save(turma);
-	}	
 }

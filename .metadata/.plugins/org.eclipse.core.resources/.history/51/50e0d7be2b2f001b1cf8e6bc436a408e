@@ -73,10 +73,10 @@ public class AlunoService {
 		findById(alunoId);
 		Turma turma = turmaService.findById(turmaId);
 		Matricula matricula = matriculaRepository.buscarMatricula(alunoId, turmaId);
-		if (matricula == null) {
-			throw new ResourceNotFoundException("Matricula para a turma informada não encontrada");		
+		if (matricula != null) {
+				matriculaRepository.desmatricular(alunoId, turmaId);			
+				turmaService.update(turma);
 		}
-		matriculaRepository.desmatricular(alunoId, turmaId);			
-		turmaService.update(turma);				
+		throw new ResourceNotFoundException("Matricula para a turma informada não encontrada");				
 	}	
 }

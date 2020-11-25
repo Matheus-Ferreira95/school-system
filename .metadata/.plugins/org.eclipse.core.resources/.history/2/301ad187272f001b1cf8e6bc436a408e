@@ -71,12 +71,16 @@ public class AlunoService {
 
 	public void desmatricular(Integer alunoId, Integer turmaId) {
 		findById(alunoId);
-		Turma turma = turmaService.findById(turmaId);
-		Matricula matricula = matriculaRepository.buscarMatricula(alunoId, turmaId);
-		if (matricula == null) {
-			throw new ResourceNotFoundException("Matricula para a turma informada não encontrada");		
+		turmaService.findById(turmaId);
+		matriculaRepository.desmatricular(alunoId, turmaId);	
+		if (noClass(alunoId)) {
+			alunoRepository.deleteById(alunoId);
 		}
-		matriculaRepository.desmatricular(alunoId, turmaId);			
-		turmaService.update(turma);				
-	}	
+	}
+
+	private boolean noClass(Integer alunoId) {
+		Matricula matricula = matriculaRepository.findByAlunoId(alunoId);
+		System.out.println(matricula);
+		return matricula == null;
+	}
 }
