@@ -3,6 +3,7 @@ package com.matheusf.project.resources;
 import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.matheusf.project.domain.Avaliacao;
+import com.matheusf.project.domain.dto.AlunosPerAvaliacaoDTO;
 import com.matheusf.project.domain.dto.AvaliacaoDTO;
 import com.matheusf.project.domain.dto.AvaliacaoInsertDTO;
 import com.matheusf.project.services.AvaliacaoService;
@@ -44,12 +46,17 @@ public class AvaliacaoResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(avali.getId()).toUri();
 		return ResponseEntity.created(uri).build();		
 	}
-	
+		
 	@GetMapping("/lista/{idAvaliacao}")
-	public ResponseEntity <List<String>> findAlunos(@PathVariable Integer idAvaliacao){
-			Avaliacao avali = avaliacaoService.findAlunos(idAvaliacao);
-			List<String> nomes = avali.getAlunos();							
-			return ResponseEntity.ok().body(nomes);		
+	public ResponseEntity <List<AlunosPerAvaliacaoDTO>> findAlunos(@PathVariable Integer idAvaliacao){
+		Avaliacao avali = avaliacaoService.findAlunos(idAvaliacao);
+		List<AlunosPerAvaliacaoDTO> nomes = new ArrayList<>();
+		avali.getAlunos().stream().forEach(x -> {
+			String nome = x.getAluno().getNome();
+			Double nota = x.getNotaObtida();
+			nomes.add(new AlunosPerAvaliacaoDTO(nome, nota));
+		});
+		return ResponseEntity.ok().body(nomes);		
 	}
 
 	private Avaliacao toEntity(@Valid AvaliacaoInsertDTO dto) throws ParseException {

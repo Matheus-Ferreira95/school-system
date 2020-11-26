@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.matheusf.project.domain.Avaliacao;
 import com.matheusf.project.repositories.AvaliacaoRepository;
 import com.matheusf.project.services.exceptions.DoMainException;
+import com.matheusf.project.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class AvaliacaoService {
@@ -34,5 +35,10 @@ public class AvaliacaoService {
 			throw new DoMainException("Avaliação de id " + idAvaliacao + " não encontrada");
 		}
 		return opt.get();
-	}		
+	}	
+	
+	public Avaliacao findById(Integer id) {
+		Optional<Avaliacao> opt = avaliacaoRepository.findById(id);
+		return opt.orElseThrow(() -> new ResourceNotFoundException("Avaliacao de id " + id + " não encontrada"));
+	}
 }

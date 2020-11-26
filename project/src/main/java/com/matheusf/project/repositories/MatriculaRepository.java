@@ -1,5 +1,7 @@
 package com.matheusf.project.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,5 +22,9 @@ public interface MatriculaRepository extends JpaRepository<Matricula, MatriculaP
 
 	@Transactional(readOnly=true)
 	@Query(value = "SELECT * FROM tb_matricula WHERE ALUNO_ID =:alunoId AND TURMA_ID =:turmaId", nativeQuery = true)
-	Matricula buscarMatricula(@Param("alunoId") Integer alunoId, @Param("turmaId") Integer turmaId);	
+	Matricula buscarMatricula(@Param("alunoId") Integer alunoId, @Param("turmaId") Integer turmaId);
+
+	@Transactional(readOnly=true)
+	@Query("SELECT obj FROM Matricula obj WHERE obj.id.aluno.id = :id")
+	List<Matricula> findByAluno(Integer id);	
 }

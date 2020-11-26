@@ -68,8 +68,8 @@ public class TurmaResource {
 		Turma turma = turmaService.findById(idTurma);
 		List<Aluno> list = turma.getAlunos();
 		return ResponseEntity.ok().body(list);
-	}
-
+	}	
+	
 	private Turma toEntity(TurmaDTO turmaDTO) throws ParseException {		
 		Turma entity = new Turma();		
 		entity.setId(null);

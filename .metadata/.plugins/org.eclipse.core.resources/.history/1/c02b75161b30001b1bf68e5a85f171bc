@@ -1,0 +1,46 @@
+package com.matheusf.project.services;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.matheusf.project.domain.Aluno;
+import com.matheusf.project.domain.Avaliacao;
+import com.matheusf.project.domain.Resultado;
+import com.matheusf.project.repositories.MatriculaRepository;
+import com.matheusf.project.repositories.ResultadoRepository;
+import com.matheusf.project.services.exceptions.DoMainException;
+
+@Service
+public class ResultadoService {
+	
+	@Autowired
+	private ResultadoRepository repository;
+	
+	@Autowired
+	private AvaliacaoService avaliacaoService;
+	
+	@Autowired
+	private AlunoService alunoService;
+	
+	@Autowired
+	private MatriculaRepository matriculaRepository;
+	
+	public Resultado insert(Resultado resultado) {
+		Avaliacao avali = avaliacaoService.findById(resultado.getAvaliacao().getId());
+		Aluno aluno = alunoService.findById(resultado.getAluno().getId());
+		List<Integer> turmasAluno = matriculaRepository.findByAluno(aluno.getId()).stream()
+									.map(x -> x.getTurma().getId()).collect(Collectors.toList());
+		if (!turmasAluno.contains(avali.getTurma().getId())) {
+			throw new DoMainException("Ops erro! O aluno " + aluno.getNome() + " não pode ter feito essa avaliação. Ele não está matriculado "
+					+ "na turma da avaliacao de id " + avali.getId());
+		}
+		return repository.save(resultado);		
+	}
+
+	public Resultado findResultado(Integer idAluno, Integer idAvaliacao) {		
+		return repository.findResultado(idAluno, idAvaliacao);
+	}	
+}

@@ -64,5 +64,5 @@ public class TurmaService {
 	public void update(Turma turma) {
 		turma.setVagas(turma.getVagas()+1);
 		turmaRepository.save(turma);
-	}	
+	}
 }

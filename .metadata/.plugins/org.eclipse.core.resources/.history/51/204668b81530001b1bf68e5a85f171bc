@@ -1,0 +1,23 @@
+package com.matheusf.project.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.matheusf.project.domain.Avaliacao;
+import com.matheusf.project.domain.Resultado;
+import com.matheusf.project.repositories.ResultadoRepository;
+
+@Service
+public class ResultadoService {
+	
+	@Autowired
+	private ResultadoRepository repository;
+	
+	@Autowired
+	private AvaliacaoService avaliacaoService;
+	
+	public void insert(Resultado resultado) {
+		Avaliacao avali = avaliacaoService.findById(resultado.getAvaliacao().getId());
+		repository.save(resultado);
+	}	
+}

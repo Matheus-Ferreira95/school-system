@@ -1,0 +1,42 @@
+package com.matheusf.project.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.matheusf.project.domain.Aluno;
+import com.matheusf.project.domain.Avaliacao;
+import com.matheusf.project.domain.Turma;
+import com.matheusf.project.repositories.AvaliacaoRepository;
+import com.matheusf.project.services.exceptions.DoMainException;
+
+@Service
+public class AvaliacaoService {
+
+	@Autowired
+	private AvaliacaoRepository avaliacaoRepository;
+		
+	@Autowired
+	private TurmaService turmaService;
+
+
+	public List<Avaliacao> findByIdTurma(Integer id) {
+		turmaService.findById(id);
+		return avaliacaoRepository.findTurmas(id);
+	}
+
+	public Avaliacao findAlunos(Integer idAvaliacao) {	
+		Optional<Avaliacao> opt = avaliacaoRepository.findById(idAvaliacao);
+		if (!opt.isPresent()) {
+			throw new DoMainException("Avaliação de id " + idAvaliacao + " não encontrada");
+		}
+		return opt.get();
+	}
+
+	/*public Avaliacao insert(Avaliacao avali) {
+		Turma turma = turmaService.findById(avali.getTurma().getId());
+		List<Aluno> list = turma.getAlunos();
+	}	*/
+}

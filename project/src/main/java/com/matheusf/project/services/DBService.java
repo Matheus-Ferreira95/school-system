@@ -43,7 +43,7 @@ public class DBService {
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
-	public void instantiateDataBase() throws ParseException {
+	public void instantiateDataBase() throws ParseException {		
 					
 		Curso c1 = new Curso(null, "Java", 70, 549.99, 100.00, 70.00);
 		Curso c2 = new Curso(null, "SQL", 40, 349.99, 100.00, 60.00);
@@ -64,6 +64,11 @@ public class DBService {
 		Aluno a5 = new Aluno("83735897088", "mity", sdf.parse("09/09/1999"));
 		
 		alunoRepository.saveAll(Arrays.asList(a1, a2, a3, a4, a5));
+		
+		// turma 1 = aluno 1, aluno4 e aluno 5
+		// turma 2 = aluno 1
+		// turma 3 = aluno 2 e aluno 3
+			
 		
 		Matricula m1 = new Matricula(t1, a1, sdf.parse("25/11/2020"), 5);
 		Matricula m2 = new Matricula(t2, a1, sdf.parse("30/11/2020"), 3);
@@ -90,8 +95,7 @@ public class DBService {
 		Resultado r1 = new Resultado(a1, av1, 22.50);
 		Resultado r2 = new Resultado(a1, av2, 15.50);
 		Resultado r3 = new Resultado(a1, av3, 10.50);
-		Resultado r4 = new Resultado(a1, av4, 19.50);
-		Resultado r5 = new Resultado(a1, av1, 22.50);
+		Resultado r4 = new Resultado(a1, av4, 19.50);		
 		Resultado r6 = new Resultado(a1, av5, 70.00);
 		Resultado r7 = new Resultado(a2, av6, 50.00);
 		Resultado r8 = new Resultado(a3, av6, 60.00);	
@@ -101,7 +105,7 @@ public class DBService {
 		Resultado r12 = new Resultado(a4, av4, 20.00);
 		Resultado r13 = new Resultado(a5, av1, 20.00);
 		
-		resultadoRepository.saveAll(Arrays.asList(r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11, r12, r13));		
+		resultadoRepository.saveAll(Arrays.asList(r1, r2, r3, r4, r6, r7, r8, r9, r10, r11, r12, r13));		
 	}
 	
 	

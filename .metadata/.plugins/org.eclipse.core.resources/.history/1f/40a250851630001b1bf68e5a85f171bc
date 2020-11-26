@@ -1,0 +1,36 @@
+package com.matheusf.project.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.matheusf.project.domain.Aluno;
+import com.matheusf.project.domain.Avaliacao;
+import com.matheusf.project.domain.Matricula;
+import com.matheusf.project.domain.Resultado;
+import com.matheusf.project.repositories.MatriculaRepository;
+import com.matheusf.project.repositories.ResultadoRepository;
+
+@Service
+public class ResultadoService {
+	
+	@Autowired
+	private ResultadoRepository repository;
+	
+	@Autowired
+	private AvaliacaoService avaliacaoService;
+	
+	@Autowired
+	private AlunoService alunoService;
+	
+	@Autowired
+	private MatriculaRepository matriculaRepository;
+	
+	public void insert(Resultado resultado) {
+		Avaliacao avali = avaliacaoService.findById(resultado.getAvaliacao().getId());
+		Aluno aluno = alunoService.findById(resultado.getAluno().getId());
+		List<Matricula> turmasAluno = matriculaRepository.findByAluno(aluno.getId());
+		repository.save(resultado);
+	}	
+}

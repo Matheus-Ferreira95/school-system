@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -24,6 +25,8 @@ public class Avaliacao {
 	private Integer id;
 	
 	private Double nota;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private Date data;
 	
 	@ManyToOne
@@ -45,16 +48,10 @@ public class Avaliacao {
 		this.turma = turma;
 	}
 	
-	public List<String> getAlunos() {
-		List<String> list = new ArrayList<>();
-		alunos.stream().forEach(x -> {			
-			String nome = x.getAluno().getNome();
-			Double nota = x.getNotaObtida();
-			list.add(nome + ": Nota: " + nota);			
-		});		
-		return list;				
+	public List<Resultado> getAlunos() {
+		return alunos;				
 	}	
-	
+		
 	public Integer getId() {
 		return id;
 	}
